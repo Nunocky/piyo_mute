@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "ぴよ日記フィルタ",
+  "version": "1.0.0",
+  "description": "piyo.hatelabo.jp で特定のユーザー、または特定のタグの発言を非表示にします",
+  "permissions": ["storage"],
+  "host_permissions": ["https://piyo.hatelabo.jp/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://piyo.hatelabo.jp/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ぴよ日記フィルタ"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

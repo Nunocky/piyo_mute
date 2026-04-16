@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ぴよ日記フィルタ</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        width: 300px;
+        padding: 12px;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0 0 12px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      .hint {
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 4px;
+      }
+      textarea {
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+        font-size: 13px;
+        resize: vertical;
+      }
+      .section {
+        margin-bottom: 12px;
+      }
+      button {
+        padding: 6px 16px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      #status {
+        color: green;
+        margin-top: 8px;
+        min-height: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ぴよ日記フィルタ</h1>
+
+    <div class="section">
+      <label for="mutedUsers">ミュートするユーザー</label>
+      <p class="hint">1行に1ユーザー名</p>
+      <textarea id="mutedUsers" placeholder="username"></textarea>
+    </div>
+
+    <div class="section">
+      <label for="mutedTags">ミュートするタグ</label>
+      <p class="hint">1行に1タグ名</p>
+      <textarea id="mutedTags" placeholder="タグ名"></textarea>
+    </div>
+
+    <button id="save">保存</button>
+    <p id="status"></p>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "piyo-mute",
+  "version": "1.0.0",
+  "description": "ぴよ日記フィルタ - piyo.hatelabo.jp で特定ユーザー・タグを非表示にする Chrome 拡張",
+  "scripts": {
+    "dev": "vite build --watch & npm run copy-static",
+    "build": "vite build && npm run copy-static",
+    "copy-static": "cp manifest.json dist/ && cp src/popup.html dist/"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.325",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}
