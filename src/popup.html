@@ -15,10 +15,31 @@
         font-size: 16px;
         margin: 0 0 12px;
       }
-      label {
-        display: block;
+      .tabs {
+        display: flex;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 12px;
+      }
+      .tab {
+        padding: 6px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: #666;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+      }
+      .tab.active {
+        color: #000;
+        border-bottom-color: #000;
         font-weight: bold;
-        margin-bottom: 4px;
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.active {
+        display: block;
       }
       .hint {
         font-size: 11px;
@@ -27,18 +48,16 @@
       }
       textarea {
         width: 100%;
-        height: 80px;
+        height: 100px;
         box-sizing: border-box;
         font-size: 13px;
         resize: vertical;
       }
-      .section {
-        margin-bottom: 12px;
-      }
-      button {
+      #save {
         padding: 6px 16px;
         font-size: 14px;
         cursor: pointer;
+        margin-top: 12px;
       }
       #status {
         color: green;
@@ -50,21 +69,24 @@
   <body>
     <h1>ぴよ日記フィルタ</h1>
 
-    <div class="section">
-      <label for="mutedUsers">ミュートするユーザー</label>
-      <p class="hint">1行に1ユーザー名</p>
-      <textarea id="mutedUsers" placeholder="username"></textarea>
+    <div class="tabs">
+      <button class="tab active" data-tab="users">ユーザー</button>
+      <button class="tab" data-tab="tags">タグ</button>
     </div>
 
-    <div class="section">
-      <label for="mutedTags">ミュートするタグ</label>
-      <p class="hint">1行に1タグ名</p>
+    <div id="panel-users" class="tab-panel active">
+      <p class="hint">1行に1ユーザー名</p>
+      <textarea id="mutedUsers" placeholder="ユーザー名"></textarea>
+    </div>
+
+    <div id="panel-tags" class="tab-panel">
+      <p class="hint">1行に1タグ名（# 不要）</p>
       <textarea id="mutedTags" placeholder="タグ名"></textarea>
     </div>
 
     <button id="save">保存</button>
     <p id="status"></p>
 
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
   </body>
 </html>

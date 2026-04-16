@@ -7,6 +7,17 @@ const mutedTagsEl = document.getElementById("mutedTags") as HTMLTextAreaElement;
 const saveBtn = document.getElementById("save") as HTMLButtonElement;
 const statusEl = document.getElementById("status") as HTMLParagraphElement;
 
+// タブ切り替え
+document.querySelectorAll<HTMLButtonElement>(".tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+    tab.classList.add("active");
+    const panelId = `panel-${tab.dataset.tab}`;
+    document.getElementById(panelId)?.classList.add("active");
+  });
+});
+
 async function init(): Promise<void> {
   const settings = await loadSettings();
   mutedUsersEl.value = settings.mutedUsers.join("\n");
