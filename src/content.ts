@@ -6,7 +6,7 @@ async function applyFilters(): Promise<void> {
 }
 
 function filterPosts(settings: Settings): void {
-  if (settings.mutedUsers.length === 0 && settings.mutedTags.length === 0) {
+  if (settings.mutedTags.length === 0) {
     return;
   }
   const posts = document.querySelectorAll<HTMLElement>('[class*="Entry_entry__"]');
@@ -18,15 +18,6 @@ function filterPosts(settings: Settings): void {
 }
 
 function shouldMute(post: HTMLElement, settings: Settings): boolean {
-  // ユーザー名チェック
-  const userEl = post.querySelector<HTMLElement>('p[class*="Entry_miniProfile__"]');
-  if (userEl) {
-    const username = userEl.textContent?.trim() ?? "";
-    if (settings.mutedUsers.includes(username)) {
-      return true;
-    }
-  }
-
   // タグチェック（テキストは "#タグ名" 形式なので先頭の # を除去して比較）
   const tagEls = Array.from(post.querySelectorAll<HTMLElement>('[class*="Entry_tag__"] a'));
   for (const tagEl of tagEls) {
@@ -47,3 +38,17 @@ const observer = new MutationObserver(() => {
   applyFilters();
 });
 observer.observe(document.body, { childList: true, subtree: true });
+
+// 設定変更を監視してリアルタイムで反映
+chrome.storage.onChanged.addListener(
+  (_changes: Record<string, chrome.storage.StorageChange>, areaName: string) => {
+    if (areaName === "sync") {
+      // 設定が変更されたら、非表示を解除してから再適用
+      const posts = document.querySelectorAll<HTMLElement>('[class*="Entry_entry__"]');
+      posts.forEach((post) => {
+        post.style.display = "";
+      });
+      applyFilters();
+    }
+  }
+);

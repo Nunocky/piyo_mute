@@ -9,6 +9,7 @@
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist",
     "lib": ["ES2020", "DOM"],
+    "types": ["chrome"],
     "skipLibCheck": true
   },
   "include": ["src"]

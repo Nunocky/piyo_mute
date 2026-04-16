@@ -1,2 +1,7 @@
 node_modules/
 dist/
+tasks.md
+sample.html
+page-*.yml
+page-*.png
+

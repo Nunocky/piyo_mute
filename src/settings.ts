@@ -1,10 +1,8 @@
 export interface Settings {
-  mutedUsers: string[];
   mutedTags: string[];
 }
 
 const DEFAULT_SETTINGS: Settings = {
-  mutedUsers: [],
   mutedTags: [],
 };
 
