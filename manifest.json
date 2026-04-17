@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ぴよ日記ミュート",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "piyo.hatelabo.jp で特定のタグの投稿を非表示にします",
   "permissions": ["storage"],
   "host_permissions": ["https://piyo.hatelabo.jp/*"],
@@ -12,9 +12,19 @@
       "run_at": "document_idle"
     }
   ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "ぴよ日記ミュート"
+    "default_title": "ぴよ日記ミュート",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "background": {
     "service_worker": "background.js",

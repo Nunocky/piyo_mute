@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アイコン生成</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; background: #f5f5f5; }
+    .icons { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; margin: 24px 0; }
+    .icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    canvas { border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; cursor: pointer; border-radius: 4px; border: 1px solid #888; background: #fff; }
+    button:hover { background: #e8e8e8; }
+    .download-all { font-size: 16px; background: #4a90e2; color: white; border-color: #3a80d2; }
+    .download-all:hover { background: #3a80d2; }
+  </style>
+</head>
+<body>
+  <h2>ぴよ日記ミュート — アイコン生成</h2>
+  <div class="icons" id="icons"></div>
+  <button class="download-all" onclick="downloadAll()">すべてダウンロード</button>
+
+  <script>
+    const SIZES = [16, 48, 128];
+
+    function drawIcon(size) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      // 背景: 明るいオレンジ (ぴよっぽい色)
+      ctx.fillStyle = '#FF8C00';
+      // 角丸の代わりに円にする (小さいサイズで綺麗に見える)
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // テキスト: 白で「ぴよ」
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (size >= 48) {
+        // 横並び: "ぴよ" を1行で
+        const fontSize = Math.round(size * 0.38);
+        ctx.font = `bold ${fontSize}px 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif`;
+        ctx.fillText('ぴよ', size / 2, size / 2);
+      } else {
+        // 16px: 「ぴ」1文字だけ (小さすぎて2文字は潰れる)
+        const fontSize = Math.round(size * 0.6);
+        ctx.font = `bold ${fontSize}px 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif`;
+        ctx.fillText('ぴ', size / 2, size / 2);
+      }
+
+      return canvas;
+    }
+
+    function download(canvas, filename) {
+      const a = document.createElement('a');
+      a.download = filename;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    }
+
+    function downloadAll() {
+      SIZES.forEach(size => {
+        const canvas = document.getElementById(`canvas-${size}`);
+        download(canvas, `icon${size}.png`);
+      });
+    }
+
+    // 描画
+    const container = document.getElementById('icons');
+    SIZES.forEach(size => {
+      const canvas = drawIcon(size);
+      canvas.id = `canvas-${size}`;
+
+      const item = document.createElement('div');
+      item.className = 'icon-item';
+      item.innerHTML = `<span>${size}x${size}</span>`;
+      item.appendChild(canvas);
+
+      const btn = document.createElement('button');
+      btn.textContent = 'DL';
+      btn.onclick = () => download(canvas, `icon${size}.png`);
+      item.appendChild(btn);
+
+      container.appendChild(item);
+    });
+  </script>
+</body>
+</html>
