@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 4,
   "name": "ぴよ日記ミュート",
   "version": "0.0.1",
   "description": "piyo.hatelabo.jp で特定のタグの投稿を非表示にします",

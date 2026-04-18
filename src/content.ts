@@ -3,6 +3,7 @@ import { loadSettings, Settings } from "./settings";
 async function applyFilters(): Promise<void> {
   const settings = await loadSettings();
   filterPosts(settings);
+  filterTrends(settings);
 }
 
 function filterPosts(settings: Settings): void {
@@ -14,6 +15,14 @@ function filterPosts(settings: Settings): void {
     if (shouldMute(post, settings)) {
       post.style.display = "none";
     }
+  });
+}
+
+function filterTrends(settings: Settings): void {
+  const tagLinks = document.querySelectorAll<HTMLAnchorElement>('[class*="Footer_tags__"] a');
+  tagLinks.forEach((a) => {
+    const tag = (a.textContent?.trim() ?? "").replace(/^#/, "");
+    a.style.display = settings.mutedTags.includes(tag) ? "none" : "";
   });
 }
 
@@ -48,6 +57,8 @@ chrome.storage.onChanged.addListener(
       posts.forEach((post) => {
         post.style.display = "";
       });
+      const trendLinks = document.querySelectorAll<HTMLAnchorElement>('[class*="Footer_tags__"] a');
+      trendLinks.forEach((a) => { a.style.display = ""; });
       applyFilters();
     }
   }
