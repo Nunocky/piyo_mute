@@ -1,7 +1,7 @@
 {
-  "manifest_version": 4,
+  "manifest_version": 3,
   "name": "ぴよ日記ミュート",
-  "version": "0.0.1",
+  "version": "3",
   "description": "piyo.hatelabo.jp で特定のタグの投稿を非表示にします",
   "permissions": ["storage"],
   "host_permissions": ["https://piyo.hatelabo.jp/*"],
