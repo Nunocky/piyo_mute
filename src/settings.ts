@@ -1,8 +1,10 @@
 export interface Settings {
+  enabled: boolean;
   mutedTags: string[];
 }
 
 const DEFAULT_SETTINGS: Settings = {
+  enabled: true,
   mutedTags: [],
 };
 
